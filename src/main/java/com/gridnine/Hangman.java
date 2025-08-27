@@ -60,13 +60,13 @@ public class Hangman {
     }
 
     public void hangMethod() {
-        clearField();
+        clearBoard();
         drawBase();
         drawBodyParts();
-        printField();
+        printBoard();
     }
 
-    public void clearField() {
+    public void clearBoard() {
         for (int i = 0; i < hangmans.length; i++) {
             for (int j = 0; j < hangmans[i].length; j++) {
                 hangmans[i][j] = ' ';
@@ -97,7 +97,7 @@ public class Hangman {
 
     }
 
-    public void printField() {
+    public void printBoard() {
         for (char[] ch : hangmans) {
             for (char c : ch) {
                 System.out.print(c);
