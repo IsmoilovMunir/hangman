@@ -36,30 +36,7 @@ public class Main {
             while (!game.isGameOver() && !game.isWordGuessed()) {
                 game.hangMethod();
                 game.printProgress();
-                System.out.println("Введите буквы");
-                String input = scanner.nextLine();
-
-                if (input.length() != 1) {
-                    boolean hasLetter = false;
-                    for (char ch : input.toCharArray()) {
-                        if (Character.isLetter(ch)) {
-                            hasLetter = true;
-                            break;
-                        }
-                    }
-                    if (!hasLetter) {
-                        System.out.println("Добавь только буквы!");
-                    } else {
-                        System.out.println("Введите только одну букву!");
-                    }
-                    continue;
-                }
-                char ch = input.charAt(0);
-                if (!Character.isLetter(ch)) {
-                    System.out.println("Добавь только буквы!");
-                    continue;
-                }
-                char letter = input.charAt(0);
+                char letter = getValidLetter(scanner);
                 if (game.guessLetter(letter)) {
                     System.out.println("Правильно!");
                 } else {
@@ -75,6 +52,26 @@ public class Main {
             }
         } catch (IOException e) {
             System.out.println("Ошибка" + e.getMessage());
+        }
+    }
+
+    public static char getValidLetter(Scanner scanner) {
+
+        while (true) {
+            System.out.println("Введите букву:");
+            String input = scanner.nextLine().trim();
+
+            if (input.length() != 1) {
+                System.out.println("Введите только одну букву!");
+                continue;
+            }
+
+            char ch = input.charAt(0);
+            if (!Character.isLetter(ch)) {
+                System.out.println("Добавь только буквы!");
+                continue;
+            }
+            return Character.toLowerCase(ch);
         }
     }
 }
