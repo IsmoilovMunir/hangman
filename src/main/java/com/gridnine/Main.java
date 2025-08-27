@@ -1,5 +1,8 @@
 package com.gridnine;
 
+import com.gridnine.excaption.EmptyWordListException;
+import com.gridnine.excaption.WordFileNotFoundException;
+
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -50,8 +53,8 @@ public class Main {
             } else {
                 System.out.println("Игра окончена! Было загадано слово: " + game.getWord());
             }
-        } catch (IOException e) {
-            System.out.println("Ошибка" + e.getMessage());
+        } catch (WordFileNotFoundException | EmptyWordListException e) {
+            System.out.println("Ошибка " + e.getMessage());
         }
     }
 
