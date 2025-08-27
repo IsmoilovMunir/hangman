@@ -9,6 +9,25 @@ public class Hangman {
     private final String word;
     private final char[] progress;
 
+    // головы
+    private static final int HEAD_X = 1;
+    private static final int HEAD_Y = 5;
+    //тело
+    private static final int BODY_X = 2;
+    private static final int BODY_Y = 5;
+    // руки
+    private static final int LEFT_ARM_X = 2;
+    private static final int LEFT_ARM_Y = 4;
+    private static final int RIGHT_ARM_X = 2;
+    private static final int RIGHT_ARM_Y = 6;
+
+    // ноги
+    private static final int LEFT_LEG_X = 3;
+    private static final int LEFT_LEG_Y = 4;
+    private static final int RIGHT_LEG_X = 3;
+    private static final int RIGHT_LEG_Y = 6;
+
+
     public Hangman(String word) {
         this.word = word.toLowerCase();
         this.progress = new char[word.length()];
@@ -57,7 +76,7 @@ public class Hangman {
 
     public void drawBase() {
         hangmans[0][1] = '+';
-        Arrays.fill(hangmans[0],2,5,'-');
+        Arrays.fill(hangmans[0], 2, 5, '-');
         hangmans[0][5] = '+';
         for (int i = 1; i <= 5; i++) {
             hangmans[i][1] = '|';
@@ -65,16 +84,16 @@ public class Hangman {
         for (int j = 0; j < 6; j++) {
             hangmans[6][j] = '_';
         }
-        Arrays.fill(hangmans[6],'_');
+        Arrays.fill(hangmans[6], '_');
     }
 
     public void drawBodyParts() {
-        if (mistakes >= 1) hangmans[1][5] = 'O';  // голова
-        if (mistakes >= 2) hangmans[2][5] = '|';  // тело
-        if (mistakes >= 3) hangmans[2][4] = '/';  // левая рука
-        if (mistakes >= 4) hangmans[2][6] = '\\'; // правая рука
-        if (mistakes >= 5) hangmans[3][4] = '/';  // левая нога
-        if (mistakes >= 6) hangmans[3][6] = '\\';
+        if (mistakes >= 1) hangmans[HEAD_X][HEAD_Y] = 'O';
+        if (mistakes >= 2) hangmans[BODY_X][BODY_Y] = '|';
+        if (mistakes >= 3) hangmans[LEFT_ARM_X][LEFT_ARM_Y] = '/';
+        if (mistakes >= 4) hangmans[RIGHT_ARM_X][RIGHT_ARM_Y] = '\\';
+        if (mistakes >= 5) hangmans[LEFT_LEG_X][LEFT_LEG_Y] = '/';
+        if (mistakes >= 6) hangmans[RIGHT_LEG_X][RIGHT_LEG_Y] = '\\';
 
     }
 
