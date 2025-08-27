@@ -1,5 +1,7 @@
 package com.gridnine;
 
+import java.util.Arrays;
+
 public class Hangman {
     private final char[][] hangmans = new char[7][7];
     private int mistakes = 0;
@@ -38,16 +40,24 @@ public class Hangman {
         return true;
     }
 
-    public char hangMethod() {
+    public void hangMethod() {
+        clearField();
+        drawBase();
+        drawBodyParts();
+        printField();
+    }
+
+    public void clearField() {
         for (int i = 0; i < hangmans.length; i++) {
             for (int j = 0; j < hangmans[i].length; j++) {
                 hangmans[i][j] = ' ';
             }
         }
+    }
+
+    public void drawBase() {
         hangmans[0][1] = '+';
-        hangmans[0][2] = '-';
-        hangmans[0][3] = '-';
-        hangmans[0][4] = '-';
+        Arrays.fill(hangmans[0], 2, 5, '-');
         hangmans[0][5] = '+';
         for (int i = 1; i <= 5; i++) {
             hangmans[i][1] = '|';
@@ -55,16 +65,6 @@ public class Hangman {
         for (int j = 0; j < 6; j++) {
             hangmans[6][j] = '_';
         }
-
-        drawBodyParts();
-
-        for (char[] ch : hangmans) {
-            for (char c : ch) {
-                System.out.print(c);
-            }
-            System.out.println();
-        }
-        return ' ';
     }
 
     public void drawBodyParts() {
@@ -75,6 +75,15 @@ public class Hangman {
         if (mistakes >= 5) hangmans[3][4] = '/';  // левая нога
         if (mistakes >= 6) hangmans[3][6] = '\\';
 
+    }
+
+    public void printField() {
+        for (char[] ch : hangmans) {
+            for (char c : ch) {
+                System.out.print(c);
+            }
+            System.out.println();
+        }
     }
 
     public void addMistake() {
