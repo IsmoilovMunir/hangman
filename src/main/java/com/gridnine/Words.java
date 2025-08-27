@@ -10,9 +10,9 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class Words {
+    private static final Random RANDOM = new Random();
 
     public static String getRandomWord(String fileName) throws RuntimeException {
         InputStream is = Words.class.getClassLoader().getResourceAsStream(fileName);
@@ -37,7 +37,6 @@ public class Words {
         if (words.isEmpty()) {
             throw new EmptyWordListException("Файл пуст или не содержит слов: " + fileName);
         }
-        return words.get(ThreadLocalRandom.current().nextInt(words.size()));
+        return words.get(RANDOM.nextInt(words.size()));
     }
-
 }
