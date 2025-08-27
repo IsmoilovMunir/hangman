@@ -10,11 +10,10 @@ import java.util.Random;
 
 public class Words {
 
-    public static String getRandomWord(String fileName) {
+    public static String getRandomWord(String fileName) throws IOException {
         try (InputStream is = Words.class.getClassLoader().getResourceAsStream(fileName)) {
             if (is == null) {
-                System.out.println("Файл не найден в ресурсах: " + fileName);
-                return "";
+                throw new IOException("Файл не найден в ресурсах: " + fileName + ". Проверьте путь к файлу!");
             }
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(is));
@@ -26,12 +25,12 @@ public class Words {
                 }
             }
 
+            if (words.isEmpty()) {
+                throw new IOException("Файл пуст или не содержит слов: " + fileName);
+            }
+
             Random random = new Random();
             return words.get(random.nextInt(words.size()));
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            return "";
         }
     }
 }
