@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Words {
 
@@ -28,9 +29,7 @@ public class Words {
             if (words.isEmpty()) {
                 throw new IOException("Файл пуст или не содержит слов: " + fileName);
             }
-
-            Random random = new Random();
-            return words.get(random.nextInt(words.size()));
+            return words.get(ThreadLocalRandom.current().nextInt(words.size()));
         }
     }
 }
