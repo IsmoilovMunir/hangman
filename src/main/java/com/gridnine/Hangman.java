@@ -57,7 +57,7 @@ public class Hangman {
 
     public void drawBase() {
         hangmans[0][1] = '+';
-        Arrays.fill(hangmans[0], 2, 5, '-');
+        Arrays.fill(hangmans[0],2,5,'-');
         hangmans[0][5] = '+';
         for (int i = 1; i <= 5; i++) {
             hangmans[i][1] = '|';
@@ -65,6 +65,7 @@ public class Hangman {
         for (int j = 0; j < 6; j++) {
             hangmans[6][j] = '_';
         }
+        Arrays.fill(hangmans[6],'_');
     }
 
     public void drawBodyParts() {
